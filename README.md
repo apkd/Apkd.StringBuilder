@@ -1,17 +1,9 @@
-# FastString
-Alternative to the [StringBuilder class](https://msdn.microsoft.com/en-us/library/system.text.stringbuilder(v=vs.110).aspx) for Unity games, with minimal memory allocation and faster performance.
-Based on [FastString](https://www.reddit.com/r/Unity3D/comments/3zz62z/alternative_to_stringbuilder_without_memory/) by Nicolas Gadenne of [Gaddy Games](http://gaddygames.com/site/)
+# Apkd.StringBuilder
 
-The class has been designed to be most useful in common game situations: a concatenation of a few string and data, then used by a Unity api method as an immutable string - every frame. 
-It handles Append() and Replace() without doing any allocation, except for very rare capacity augmentation (contrary to StringBuilder which surprisingly does capacity change very often). 
-It also appends float and int numbers without any allocation. 
+An alternative to the [StringBuilder class](https://docs.microsoft.com/en-us/dotnet/api/system.text.stringbuilder), with minimal memory allocation.
 
-The only common memory allocation is when you retrieve the final immutable string - but this is only done when required.
+The default Mono/.NET4+/.NET Core StringBuilder implementation is optimized for the common case of multiple calls to `StringBuilder.Append` by storing strings in a linked-list of chunks.[1] This implementation is more similar to the .NET2.0 one, in the way it is optimized for better performance in the case of frequent `Insert`/`Remove` operations.
 
-# Running the tests
+You can get zero allocations (other than the `ToString()` call) by re-using the same `StringBuilder` instance.
 
-A Unity project is provided for testing the performance.
-
-- To run the performance tests, open the FastStringTest scene and the Profiler ( Window > Profiler ).
-- Run the scene in the editor and then stop it again.
-- Enter 'Test' in the profile search to see the profile results for each technique.
+[1] https://codingsight.com/stringbuilder-the-past-and-the-future/
