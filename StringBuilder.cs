@@ -8,10 +8,10 @@ namespace Apkd
 {
     public sealed class StringBuilder : IList<char>, IReadOnlyList<char>
     {
-        string _cachedString = "";
-        char[] _buffer = null;
+        char[] _buffer;
         int _bufferPos = 0;
-        List<char> _temp;
+        List<char> _temp = null;
+        string _cachedString = "";
 
         public StringBuilder(int capacity = 64)
             => _buffer = new char[capacity];
@@ -37,7 +37,6 @@ namespace Apkd
         {
             if (_cachedString == null)
                 _cachedString = new string(_buffer, 0, _bufferPos);
-
             return _cachedString;
         }
 
@@ -62,7 +61,6 @@ namespace Apkd
             _temp.CopyTo(_buffer);
             _bufferPos += text.Length;
             _cachedString = null;
-
             return this;
         }
 
@@ -78,7 +76,6 @@ namespace Apkd
             _temp.CopyTo(_buffer);
             _bufferPos += 1;
             _cachedString = null;
-
             return this;
         }
 
@@ -93,7 +90,6 @@ namespace Apkd
             _temp.CopyTo(_buffer);
             _bufferPos -= count;
             _cachedString = null;
-
             return this;
         }
 
@@ -107,7 +103,6 @@ namespace Apkd
             other._buffer.CopyTo(_buffer, _bufferPos);
             _cachedString = null;
             _bufferPos += other._bufferPos;
-
             return this;
         }
 
@@ -123,7 +118,6 @@ namespace Apkd
                 _buffer[_bufferPos + i] = value[i];
             _bufferPos += n;
             _cachedString = null;
-
             return this;
         }
 
