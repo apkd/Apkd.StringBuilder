@@ -1,5 +1,5 @@
 // Original author: Nicolas Gadenne (contact@gaddygames.com) 
-// https://github.com/snozbot/StringBuilder
+// https://github.com/snozbot/FastString
 
 using System.Collections;
 using System.Collections.Generic;
